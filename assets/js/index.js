@@ -31,23 +31,11 @@ const next = function nextFunction() {
   sliderShow.classList.remove("showSlider");
   sliderImg.setAttribute("src", changeableAttr);
 };
-setInterval(next, 1000);
+setInterval(next, 5000);
 newBtn.addEventListener("click", next);
 
 prev.addEventListener("click", function (e) {
-  let sliderShow = document.querySelector(".showSlider");
-
-  let changeableAttr;
-  if (sliderShow.previousElementSibling) {
-    sliderShow.previousElementSibling.classList.add("showSlider");
-
-    changeableAttr = sliderShow.previousElementSibling.getAttribute("href");
-  } else {
-    sliderShow.parentElement.children[2].classList.add("showSlider");
-    changeableAttr = sliderShow.parentElement.children[2];
-  }
-  sliderShow.classList.remove("showSlider");
-  sliderImg.setAttribute("src", changeableAttr);
+  arrowLeftFunction();
 });
 function CloseImg() {
   newPopup.style.display = "none";
@@ -67,4 +55,45 @@ document.addEventListener("keydown", function (e) {
   if (e.key === "Escape") {
     CloseImg();
   }
+  console.log(e.key);
+});
+
+function arrowRightFunction() {
+  let sliderShow = document.querySelector(".showSlider");
+
+  let changeableAttr;
+  if (sliderShow.nextElementSibling) {
+    sliderShow.nextElementSibling.classList.add("showSlider");
+
+    changeableAttr = sliderShow.nextElementSibling.getAttribute("href");
+  } else {
+    sliderShow.parentElement.children[0].classList.add("showSlider");
+    changeableAttr = sliderShow.parentElement.children[0];
+  }
+  sliderShow.classList.remove("showSlider");
+  sliderImg.setAttribute("src", changeableAttr);
+}
+function arrowLeftFunction() {
+  let sliderShow = document.querySelector(".showSlider");
+
+  let changeableAttr;
+  if (sliderShow.previousElementSibling) {
+    sliderShow.previousElementSibling.classList.add("showSlider");
+
+    changeableAttr = sliderShow.previousElementSibling.getAttribute("href");
+  } else {
+    sliderShow.parentElement.children[2].classList.add("showSlider");
+    changeableAttr = sliderShow.parentElement.children[2];
+  }
+  sliderShow.classList.remove("showSlider");
+  sliderImg.setAttribute("src", changeableAttr);
+}
+
+document.addEventListener("keydown", function (e) {
+  if (e.key === "ArrowRight") {
+    arrowRightFunction();
+  } else if (e.key === "ArrowLeft") {
+    arrowLeftFunction();
+  }
+  console.log(e.key);
 });
